@@ -25,14 +25,14 @@ const InputSubmit = styled.input`
 const Formulario = () => {
 
   
-
-  const [SelectMonedas] = useSelectMonedas('Elije tu moneda', monedas)
+//..al ser un arreglo, puedo poner cualquier nombre, ya que retorna según el índice
+  const [moneda, SelectMonedas] = useSelectMonedas('Elije tu moneda', monedas)
 
   
   return (
     <form>
         <SelectMonedas />
-
+        
         <InputSubmit
             type="submit"
             value='cotizar'
