@@ -28,6 +28,7 @@ const Formulario = () => {
   
 //..al ser un arreglo, puedo poner cualquier nombre, ya que retorna según el índice
   const [moneda, SelectMonedas] = useSelectMonedas('Elije tu moneda', monedas)
+  const [criptomoneda, SelectCriptomoneda] = useSelectMonedas('Elije tu Criptomoneda', criptos)
 
   // useEffect es un buen lugar para mandar llamar una API
   useEffect(() => {
@@ -52,6 +53,7 @@ const Formulario = () => {
   return (
     <form>
         <SelectMonedas />
+        <SelectCriptomoneda />
         
         <InputSubmit
             type="submit"
