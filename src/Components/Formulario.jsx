@@ -1,4 +1,4 @@
-import {useEffect} from 'react';
+import {useEffect, useState} from 'react';
 import styled from '@emotion/styled';
 import useSelectMonedas from '../hooks/useSelectMonedas';
 import {monedas} from '../data/monedas';
@@ -24,6 +24,7 @@ const InputSubmit = styled.input`
 
 const Formulario = () => {
 
+  const [criptos, setCriptos] = useState([])
   
 //..al ser un arreglo, puedo poner cualquier nombre, ya que retorna según el índice
   const [moneda, SelectMonedas] = useSelectMonedas('Elije tu moneda', monedas)
@@ -31,10 +32,18 @@ const Formulario = () => {
   // useEffect es un buen lugar para mandar llamar una API
   useEffect(() => {
     const consultarAPI = async () => {
-      const url = 'https://min-api.cryptocompare.com/data/top/mktcapfull?limit=20&tsym=USD'
+      const url = 'https://min-api.cryptocompare.com/data/top/mktcapfull?limit=10&tsym=USD'
       const respuesta = await fetch(url)
       const resultado = await respuesta.json()
-      console.log(resultado.Data)
+      const arrayCriptos = resultado.Data.map( cripto => {
+
+        const objeto = {
+          id: cripto.CoinInfo.Name,
+          nombre: cripto.CoinInfo.FullName
+          }
+            return objeto
+      } )
+      setCriptos(arrayCriptos)
     }
     consultarAPI()
   }, [])
